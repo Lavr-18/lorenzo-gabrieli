@@ -30,51 +30,41 @@
 
 1. Клонируй репозиторий:
 
-```bash
+```
 git clone https://github.com/ИМЯ_ПОЛЬЗОВАТЕЛЯ/lorenzo_gabrieli.git
 cd lorenzo_gabrieli
 ```
 
 Создай виртуальное окружение и активируй его:
 
-```bash
+```
 python -m venv venv
 source venv/bin/activate  # для Linux/macOS
 venv\Scripts\activate     # для Windows
 ```
 
 Установи зависимости:
-```bash
+```
 pip install -r requirements.txt
 ```
 
 Примени миграции:
 ```
-bash
 python manage.py migrate
 ```
 
 Создай суперпользователя:
 ```
-bash
 python manage.py createsuperuser
 ```
 
 Запусти сервер:
-```bash
+```
 python manage.py runserver
 ```
 
 
 Перейди на http://127.0.0.1:8000/ — и ты в магазине!
-
-lorenzo_gabrieli/
-├── cart/                 # корзина
-├── products/             # товары и категории
-├── templates/            # шаблоны
-├── static/               # статические файлы
-├── manage.py
-└── ...
 
 🛠️ План разработки
  Категории и товары
