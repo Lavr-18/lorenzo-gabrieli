@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Список товаров{% endblock %}
+
+{% block content %}
+    <h2>Категории</h2>
+    <ul>
+        <li>
+            <a href="{% url 'product_list' %}"
+               {% if not selected_category %}style="font-weight: bold;"{% endif %}>
+                Все
+            </a>
+        </li>
+        {% for category in categories %}
+            <li>
+                <a href="{% url 'product_list' %}?category={{ category.id }}"
+                   {% if selected_category and category.id == selected_category.id %}style="font-weight: bold;"{% endif %}>
+                    {{ category.name }}
+                </a>
+            </li>
+        {% empty %}
+            <li>Нет доступных категорий.</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Список товаров</h2>
+    <ul>
+        {% for product in products %}
+            <li>
+                <a href="{% url 'product_detail' product.pk %}">{{ product.name }}</a> – {{ product.price }} ₽<br>
+                Категория: {{ product.category.name }}<br>
+                {{ product.description }}
+            </li>
+        {% empty %}
+            <li>Товары не найдены.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
