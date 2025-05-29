@@ -1,5 +1,6 @@
 from django.db import models
 from products.models import Product
+from django import forms
 
 
 class Order(models.Model):
@@ -11,6 +12,10 @@ class Order(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     paid = models.BooleanField(default=False, verbose_name='Оплачен')
+
+    # Добавлено
+    postal_code = models.CharField(max_length=20, blank=True, null=True)
+    city = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
         ordering = ['-created']
@@ -32,3 +37,26 @@ class OrderItem(models.Model):
 
     def get_cost(self):
         return self.price * self.quantity
+
+
+
+class OrderCreateForm(forms.ModelForm):
+    class Meta:
+        model = Order
+        fields = [
+            'first_name', 'last_name', 'email',
+            'address', 'phone', 'postal_code', 'city'
+        ]
+
+    def clean_postal_code(self):
+        data = self.cleaned_data.get('postal_code')
+        if not data:
+            raise forms.ValidationError("Введите почтовый индекс")
+        return data
+
+    def clean_city(self):
+        data = self.cleaned_data.get('city')
+        if not data:
+            raise forms.ValidationError("Введите город")
+        return data
+
