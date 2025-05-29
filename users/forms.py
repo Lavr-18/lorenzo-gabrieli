@@ -1,14 +1,17 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from .models import CustomUser
+from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 
+class UserRegistrationForm(forms.ModelForm):
+    password = forms.CharField(label='Пароль', widget=forms.PasswordInput)
+    password2 = forms.CharField(label='Подтверждение пароля', widget=forms.PasswordInput)
 
-class CustomUserCreationForm(UserCreationForm):
     class Meta:
-        model = CustomUser
-        fields = ('username', 'email')
+        model = User
+        fields = ('username', 'first_name', 'email')
 
-
-class CustomAuthenticationForm(AuthenticationForm):
-    # Можно тут кастомизировать форму, если нужно
-    pass
+    def clean_password2(self):
+        cd = self.cleaned_data
+        if cd.get('password') != cd.get('password2'):
+            raise ValidationError('Пароли не совпадают.')
+        return cd.get('password2')

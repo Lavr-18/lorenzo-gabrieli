@@ -29,6 +29,8 @@ INSTALLED_APPS = [
     'products',
     'cart',
     'orders',
+    'accounts',
+
 ]
 
 MIDDLEWARE = [
@@ -116,3 +118,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'users.CustomUser'
 
 ROOT_URLCONF = 'config.urls'
+
+LOGIN_REDIRECT_URL = 'product_list'
+LOGOUT_REDIRECT_URL = 'users:login'
+LOGIN_URL = '/account/login/'                # куда перенаправлять, если неавторизованный пользователь пытается попасть на защищённую страницу
+
