@@ -1,9 +1,13 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ru">
+<!-- base.html -->
 <head>
-    <meta charset="UTF-8">
-    <title>{% block title %}Lorenzo Gabrieli{% endblock %}</title>
+  {% load static %}
+  <title>{% block title %}Lorenzo Gabrieli{% endblock %}</title>
+  {% block extra_css %}{% endblock %}
 </head>
+
 <body>
 
     <header>

@@ -123,3 +123,14 @@ LOGIN_REDIRECT_URL = 'product_list'
 LOGOUT_REDIRECT_URL = 'users:login'
 LOGIN_URL = '/account/login/'                # куда перенаправлять, если неавторизованный пользователь пытается попасть на защищённую страницу
 
+
+
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    BASE_DIR / 'accounts' / 'static',
+]
