@@ -8,7 +8,7 @@ urlpatterns = [
     path('users/', include('users.urls', namespace='users')),
     path('cart/', include('cart.urls')),
     path('orders/', include('orders.urls')),
-    path('account/', include('accounts.urls', namespace='accounts')),
+    path('account/', include('users.urls', namespace='users')),
     # path('account/', include('users.urls', namespace='users')),
 
 

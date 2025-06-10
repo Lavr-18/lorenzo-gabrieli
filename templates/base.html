@@ -3,10 +3,13 @@
 <html lang="ru">
 <!-- base.html -->
 <head>
-  {% load static %}
+  <meta charset="UTF-8">
   <title>{% block title %}Lorenzo Gabrieli{% endblock %}</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'base.css' %}">
   {% block extra_css %}{% endblock %}
 </head>
+
 
 <body>
 

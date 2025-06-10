@@ -29,7 +29,6 @@ INSTALLED_APPS = [
     'products',
     'cart',
     'orders',
-    'accounts',
 
 ]
 
@@ -134,3 +133,5 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'
