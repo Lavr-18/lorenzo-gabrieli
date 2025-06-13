@@ -1,9 +1,10 @@
+# lorenzo-gabrieli/users/forms.py
 from django import forms
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 
 
-User = get_user_model()
+User = get_user_model() # Это будет ваша CustomUser
 
 class UserRegistrationForm(forms.ModelForm):
     password = forms.CharField(label='Пароль', widget=forms.PasswordInput)
@@ -11,7 +12,7 @@ class UserRegistrationForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'email')
+        fields = ('username', 'first_name', 'email', 'phone')
 
     def clean_password2(self):
         cd = self.cleaned_data
