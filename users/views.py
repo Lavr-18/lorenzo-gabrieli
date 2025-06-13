@@ -10,7 +10,7 @@ from django.contrib import messages
 
 @login_required
 def dashboard(request):
-    orders = Order.objects.filter(email=request.user.email).order_by('-created')
+    orders = Order.objects.filter(user=request.user).order_by('-created')
     return render(request, 'users/dashboard.html', {'orders': orders})
 
 
@@ -19,10 +19,15 @@ def register(request):
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
             new_user = form.save(commit=False)
-            new_user.set_password(form.cleaned_data['password'])
+            new_user.set_password(form.cleaned_data['password']) # Устанавливаем хэшированный пароль
             new_user.save()
             messages.success(request, 'Регистрация прошла успешно! Вы можете войти в систему.')
-            return redirect('users:login')
+            return redirect('users:login') # Перенаправляем на login
+        else:
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f"{form.fields[field].label}: {error}") # Выводим метку поля
+            messages.error(request, 'Пожалуйста, исправьте ошибки в форме.') # Общее сообщение об ошибке
     else:
         form = UserRegistrationForm()
     return render(request, 'users/register.html', {'form': form})
